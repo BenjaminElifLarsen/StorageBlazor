@@ -1,0 +1,75 @@
+﻿@page "/SQLAdd"
+
+<h1>SQLAdd</h1>
+
+<h3>Name</h3>
+<p>
+    <input @bind="name" /> Name: @name
+</p>
+<p>
+    <input @bind="information" /> Information: @information
+</p>
+
+<p>
+    <input @bind="Amount" /> Amount: @Amount
+</p>
+
+<p>
+    <input @bind="id" /> ID: @id
+</p>
+
+<p>
+    <input @bind="type" /> Type: @type
+</p>
+
+<button @onclick="SubmitData">Submit</button>
+
+<p>Does it work? @Testing()</p>
+Erorr: @text
+
+@code {
+    private string type;
+    private string id;
+    private string name;
+    private string information;
+    private string amount;
+    private string Amount { get => amount; set { amount = IntToString(value); } }
+
+    private static string IntToString(string value)
+    {
+        try
+        {
+            Int32.Parse(value);
+            return value;
+        }
+        catch
+        {
+            return "0";
+        }
+    }
+
+    private void SubmitData()
+    {
+        Data.wares.Add(new WareItem {Name = name, Information = information, ID = id, Amount = Int32.Parse(Amount), Type = type });
+        type = null;
+        id = null;
+        name = null;
+        amount = null;
+        information = null;
+    }
+
+    static string connectionString = SQLControl.CreateConnectionString();
+    static bool? test = null;
+    static string text;
+    static bool Testing()
+    {
+        try {
+            return SQLControl.CreateConnection(connectionString);
+        }
+        catch (Exception e)
+        {
+            text = e.Message;
+            return false;
+        }
+    }
+}

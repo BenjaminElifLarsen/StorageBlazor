@@ -1,0 +1,24 @@
+﻿@page "/SQLSelect";
+
+
+@code {
+    IList<WareItem> wares = Data.wares;
+}
+
+<h3>SQLSelect</h3>
+
+<ul>
+    @foreach (WareItem ware in wares)
+    {
+    <li>
+        @ware.Name
+        <ul>
+            <li>@ware.ID</li>
+            <li>@ware.Information</li>
+            <li>@ware.Amount</li>
+            <li>@ware.Type</li>
+        </ul>
+    </li>
+    }
+</ul>
+

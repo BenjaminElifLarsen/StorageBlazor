@@ -1,0 +1,46 @@
+﻿@page "/MainSQL"
+
+<h1>SQLMain</h1>
+<ul class="nav flex-column">
+    <li>
+        <NavLink class="nav-link" href="sqlselect">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Select
+        </NavLink>
+    </li>
+    <li>
+        <NavLink class="nav-link" href="sqladd">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Add
+        </NavLink>
+    </li>
+    <li>
+        <NavLink class="nav-link" href="sqlupdate">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Update
+        </NavLink>
+    </li>
+    <li>
+        <NavLink class="nav-link" href="sqlmodify">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Modify
+        </NavLink>
+    </li>
+    <li>
+        <NavLink class="nav-link" href="sqlremove">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Remove
+        </NavLink>
+    </li>
+</ul>
+
+@code {
+    string[] hrefs = new string[] {"sqlselect","sqladd","sqlupdate","sqlmodify","sqlremove" };
+    string[] linkNames = new string[] {"Select","Add","Update","Modify","Remove" };
+
+    private string GenerateMenu(string[] links, string[] linkNames)
+    {
+        System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder("<ul class=\"nav flex-column\">");
+        for(int i = 0; i < links.Length; i++)
+        {
+            stringBuilder.Append($"<li><NavLink class=\"nav-link\" href=\"{links[i]}\"><span class=\"oi oi-list-rich\" aria-hidden=\"true\"></span>{linkNames[i]}</NavLink></li>");
+        }
+        stringBuilder.Append("</ul>");
+        return stringBuilder.ToString();
+    }
+}
