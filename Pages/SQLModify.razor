@@ -1,6 +1,19 @@
 ﻿@page "/SQLModify";
 <h3>SQLModify</h3>
+Enter ID:
+<input @bind="ID" />
+<button @onclick="GetInformation">Remove Ware</button>
 
 @code {
-
+    private string ID { get; set; }
+    private WareItem ware;
+    private void GetInformation()
+    {
+        foreach(WareItem ware in Data.wares)
+            if(ware.ID == ID)
+            {
+                this.ware = ware;
+                break;
+            }
+    }
 }

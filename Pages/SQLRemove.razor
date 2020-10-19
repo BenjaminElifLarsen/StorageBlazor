@@ -1,6 +1,27 @@
 ﻿@page "/SQLRemove";
 <h3>SQLRemove</h3>
+Enter ID: <input @bind="ID"/>
+<button @onclick="RemoveWare">Remove Ware</button>
+@validation
 
 @code {
+    private string ID { get; set; }
+    private string validation;
 
+    private void RemoveWare()
+    {
+        bool wasFound = false;
+        for (int i = Data.wares.Count - 1; i >= 0; i--)
+            if (Data.wares[i].ID == ID)
+            {
+                Data.wares.RemoveAt(i);
+                validation = "Product was removed.";
+                wasFound = true;
+                break;
+            }
+
+        if (!wasFound)
+            validation = "Product was not found.";
+        ID = null;
+    }
 }
